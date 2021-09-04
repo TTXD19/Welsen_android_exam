@@ -12,7 +12,7 @@ class MainActivityApplication: Application() {
         Realm.init(this)
         startKoin {
             androidContext(this@MainActivityApplication)
-            modules(listOf(networkModule, apiServiceModule, dataSourceModule, repositoryModule, viewModelModule))
+            modules(listOf(networkModule, apiServiceModule, dataSourceModule, repositoryModule, viewModelModule, realmModelModule))
         }
     }
 }
