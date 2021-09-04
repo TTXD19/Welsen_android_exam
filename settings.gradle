@@ -1,0 +1,2 @@
+rootProject.name = "Welsen_android_exam"
+include ':app'
