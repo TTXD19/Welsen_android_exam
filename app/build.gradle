@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'realm-android'
 }
 
 android {
@@ -18,7 +20,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "GIT_BASE_URL", '"https://newsapi.org/"')
+            buildConfigField("String", "API_KEY", '"eb150997214f4d289613a0010b32751b"')
+        }
         release {
+            buildConfigField("String", "GIT_BASE_URL", '"https://newsapi.org/"')
+            buildConfigField("String", "API_KEY", '"eb150997214f4d289613a0010b32751b"')
+
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -35,6 +45,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    realm {
+        syncEnabled = true
+    }
 }
 
 ext {
@@ -50,6 +64,7 @@ ext {
     retrofitRxJava3Adapter = '3.0.0'
     rxKotlin = '3.0.0'
     koin_version= "3.1.2"
+    realm_version = "10.7.0"
 }
 
 dependencies {
