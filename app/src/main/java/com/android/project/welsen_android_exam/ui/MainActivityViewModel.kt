@@ -1,9 +1,7 @@
 package com.android.project.welsen_android_exam.ui
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.project.welsen_android_exam.data.data_class.NewsDetailResp
 import com.android.project.welsen_android_exam.data.data_class.local.NewsDetailRespRealm
 import com.android.project.welsen_android_exam.data.data_source.local.IRealmManager
 import com.android.project.welsen_android_exam.data.repository.INewsRepository
@@ -23,7 +21,8 @@ class MainActivityViewModel(
             Realm.getDefaultInstance().use {
                 it.executeTransaction { realm ->
                     for (data in newsResp.articles!!){
-                        realm.insert(NewsDetailRespRealm().apply {
+                        realm.copyToRealmOrUpdate(NewsDetailRespRealm().apply {
+                            time = data.publishedAt
                             newsTitle = data.title
                             imageUrl = data.urlToImage
                         })

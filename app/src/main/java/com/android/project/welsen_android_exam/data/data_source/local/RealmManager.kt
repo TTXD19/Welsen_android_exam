@@ -7,7 +7,7 @@ import io.realm.kotlin.where
 
 open class RealmManager(
     val realm: Realm
-): IRealmManager {
+) : IRealmManager {
 
     override fun getNewsList(): RealmResults<NewsDetailRespRealm> {
         return realm.where<NewsDetailRespRealm>().findAllAsync()

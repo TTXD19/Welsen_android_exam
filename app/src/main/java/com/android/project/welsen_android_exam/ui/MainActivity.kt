@@ -2,23 +2,29 @@ package com.android.project.welsen_android_exam.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.android.project.welsen_android_exam.R
+import com.android.project.welsen_android_exam.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
     private val mainActivityViewModel: MainActivityViewModel by viewModel()
+
+    private val mainActivityAdapter by lazy { MainActivityAdapter() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+
+        binding.rvNews.adapter = mainActivityAdapter
 
         mainActivityViewModel.fetchData()
         mainActivityViewModel.getLocalData()
         mainActivityViewModel.data.observe(this){
-            Log.d("testData", it.size.toString())
+            mainActivityAdapter.updateDataList(it)
         }
     }
 }
