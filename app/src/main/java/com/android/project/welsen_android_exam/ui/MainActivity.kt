@@ -3,7 +3,6 @@ package com.android.project.welsen_android_exam.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.android.project.welsen_android_exam.databinding.ActivityMainBinding
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -23,8 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         mainActivityViewModel.fetchData()
         mainActivityViewModel.getLocalData()
-        mainActivityViewModel.data.observe(this){
-            mainActivityAdapter.updateDataList(it)
-        }
+        mainActivityViewModel.data.observe(this){ mainActivityAdapter.updateDataList(it) }
     }
 }
